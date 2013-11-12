@@ -1,7 +1,7 @@
 Dual-scaled-D3-Bar-Charts
 ========================
 
-This is a demo for a dual-scaled bar chart created using D3.js
+This is a demo for creating dual-scaled bar charts using D3.js
 
 I came across this task where I was asked to create a dual-scaled bar chart. As I googled around and, unfortunately, could not found any example, I decided to do it myself.
 
