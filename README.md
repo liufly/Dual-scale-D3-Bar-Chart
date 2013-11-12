@@ -1,4 +1,4 @@
-Dual-scaled-D3-Bar-Chart
+Dual-scaled-D3-Bar-Charts
 ========================
 
 This is a demo for a dual-scaled bar chart created using D3.js
