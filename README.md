@@ -9,7 +9,7 @@ Please bear in mind that I am new to D3.js and this is actually my first time us
 
 Hope that this could be of use to someone. All suggestions for improvement are welcome.
 
-Note: since d3.js uses ajax to load tsv files, the files contained in the src folder cannot be run in a browser using file:///. Execute the following command in the under the src directory to create a HTTP server.
+Note: since d3.js uses ajax to load tsv files, the files contained in the src folder cannot be run in a browser using file:///. Execute the following command under the src directory to create a HTTP server.
 
     python -m SimpleHTTPServer
 
