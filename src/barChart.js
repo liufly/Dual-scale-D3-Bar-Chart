@@ -1,24 +1,19 @@
+var data = [
+    { y: 50, x: 0.05 },
+    { y: 10, x: 0.15 },
+    { y: 300, x: 0.25 },
+    { y: 250, x: 0.35 },
+    { y: 70, x: 0.45 },
+    { y: 270, x: 0.55 },
+    { y: 100, x: 0.65 },
+    { y: 30, x: 0.75 }
+];
+
 var margin = {top: 80, right: 80, bottom: 80, left: 80},
     width = 600 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
-var x = d3.scale.ordinal()
-    .rangeRoundBands([0, width], .1);
-
-var y = d3.scale.linear()
-        .domain([300, 1100])
-        .range([height, 0]);
-
-var xAxis = d3.svg.axis()
-    .scale(x)
-    .orient("bottom");
-
-// create left yAxis
-var yAxis = d3.svg.axis()
-        .scale(y)
-        .ticks(4)
-        .orient("left");
-
+// Render the main "svg" tag
 var svg = d3.select("body")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -27,38 +22,53 @@ var svg = d3.select("body")
     .attr("class", "graph")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.tsv("data.tsv", type, function(error, data) {
-  x.domain(data.map(function(d) { return d.year; }));
-  y.domain([0, d3.max(data, function(d) { return d.money; })]);
+// Initialize scales
+var x = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1)
+    .domain(data.map(function(d, i) { return d.x } ));
 
-  svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
+var y = d3.scale.linear()
+        .range([height, 0])
+        .domain([0, 500]);
 
-  svg.append("g")
-     .attr("class", "y axis axisLeft")
-     .attr("transform", "translate(0,0)")
-     .call(yAxis)
-    .append("text")
-     .attr("y", 6)
-     .attr("dy", "-2em")
-     .style("text-anchor", "end")
-     .style("text-anchor", "end");
+// Create axis
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
 
+var yAxis = d3.svg.axis()
+        .scale(y)
+        .ticks(4)
+        .orient("left");
 
-  var bars = svg.selectAll(".bar").data(data).enter();
+// Render axis to the graph
+svg.append("g")
+  .attr("class", "x axis")
+  .attr("transform", "translate(0," + height + ")")
+  .call(xAxis);
 
-  bars.append("rect")
-      .attr("class", "bar1")
-      .attr("x", function(d) { return x(d.year); })
-      .attr("width", x.rangeBand())
-      .attr("y", function(d) { return y(d.money); })
-      .attr("height", function(d,i,j) { return height - y(d.money); });
+svg.append("g")
+ .attr("class", "y axis axisLeft")
+ .attr("transform", "translate(0,0)")
+ .call(yAxis)
+.append("text")
+ .attr("y", 6)
+ .attr("dy", "-2em")
+ .style("text-anchor", "end")
+ .style("text-anchor", "end");
 
-});
+// Render bars to the graph
+var bars = svg.selectAll(".bar").data(data).enter();
 
-function type(d) {
-  d.money = +d.money;
-  return d;
-}
+bars.append("rect")
+  .attr("class", "bar1")
+  .attr("x", function(d, i) {
+      return x(d.x);
+  })
+  .attr('y', function(d, i) {
+      return y(d.y)
+  })
+  .attr("width", x.rangeBand())
+  .attr("height", function(d, i) {
+      return height - y(d.y);
+  });
