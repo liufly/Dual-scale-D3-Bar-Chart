@@ -1,23 +1,21 @@
- body {
-      font: 10px sans-serif;
-    }
+body {
+  font: 10px sans-serif;
+}
 
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
 
-    .y.axis text {
-        fill: steelblue;
-    }
+.bar {
+  fill: steelblue;
+}
 
-    .axis path,
-    .axis line {
-      fill: none;
-      stroke: #000;
-      shape-rendering: crispEdges;
-    }
-
-    .bar {
-      fill: steelblue;
-    }
-
-    .y.axis path {
-      display: none;
-    }
+.y.axis path {
+  display: none;
+}
+.y.axis line {
+    stroke: #777;
+}

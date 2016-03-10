@@ -34,11 +34,13 @@ var y = d3.scale.linear()
 // Create axis
 var xAxis = d3.svg.axis()
     .scale(x)
+    .outerTickSize(0)
     .orient("bottom");
 
 var yAxis = d3.svg.axis()
         .scale(y)
-        .ticks(4)
+        .tickValues([125, 250, 375, 500])
+        .innerTickSize(-width)
         .orient("left");
 
 // Render axis to the graph
@@ -48,7 +50,7 @@ svg.append("g")
   .call(xAxis);
 
 svg.append("g")
- .attr("class", "y axis axisLeft")
+ .attr("class", "y axis")
  .attr("transform", "translate(0,0)")
  .call(yAxis)
 .append("text")
@@ -61,7 +63,7 @@ svg.append("g")
 var bars = svg.selectAll(".bar").data(data).enter();
 
 bars.append("rect")
-  .attr("class", "bar1")
+  .attr("class", "bar")
   .attr("x", function(d, i) {
       return x(d.x);
   })
