@@ -34,11 +34,13 @@ var y = d3.scale.linear()
 // Create axis
 var xAxis = d3.svg.axis()
     .scale(x)
+    .outerTickSize(0)
     .orient("bottom");
 
 var yAxis = d3.svg.axis()
         .scale(y)
         .tickValues([125, 250, 375, 500])
+        .innerTickSize(-width)
         .orient("left");
 
 // Render axis to the graph
