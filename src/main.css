@@ -2,13 +2,6 @@ body {
   font: 10px sans-serif;
 }
 
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
 .bar {
   fill: steelblue;
 }
@@ -18,4 +11,9 @@ body {
 }
 .y.axis line {
     stroke: #777;
+}
+
+.x.axis path {
+    stroke: #000;
+    stroke-width: 2px;
 }

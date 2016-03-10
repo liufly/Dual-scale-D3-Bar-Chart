@@ -1,5 +1,5 @@
 var data = [
-    { y: 50, x: 0.05 },
+    { y: 2, x: 0.05 },
     { y: 10, x: 0.15 },
     { y: 300, x: 0.25 },
     { y: 250, x: 0.35 },
@@ -43,12 +43,13 @@ var yAxis = d3.svg.axis()
         .innerTickSize(-width)
         .orient("left");
 
-// Render axis to the graph
+// Render x-axis to the graph
 svg.append("g")
   .attr("class", "x axis")
-  .attr("transform", "translate(0," + height + ")")
+  .attr("transform", "translate(0," + (height + 1) + ")")
   .call(xAxis);
 
+// Render y-axis to the graph
 svg.append("g")
  .attr("class", "y axis")
  .attr("transform", "translate(0,0)")
