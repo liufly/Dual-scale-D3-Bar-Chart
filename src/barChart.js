@@ -5,12 +5,8 @@ var margin = {top: 80, right: 80, bottom: 80, left: 80},
 var x = d3.scale.ordinal()
     .rangeRoundBands([0, width], .1);
 
-var y0 = d3.scale.linear()
+var y = d3.scale.linear()
         .domain([300, 1100])
-        .range([height, 0]),
-
-    y1 = d3.scale.linear()
-        .domain([20, 80])
         .range([height, 0]);
 
 var xAxis = d3.svg.axis()
@@ -18,16 +14,10 @@ var xAxis = d3.svg.axis()
     .orient("bottom");
 
 // create left yAxis
-var yAxisLeft = d3.svg.axis()
-        .scale(y0)
+var yAxis = d3.svg.axis()
+        .scale(y)
         .ticks(4)
         .orient("left");
-
-// create right yAxis
-var yAxisRight = d3.svg.axis()
-        .scale(y1)
-        .ticks(6)
-        .orient("right");
 
 var svg = d3.select("body")
   .append("svg")
@@ -39,7 +29,7 @@ var svg = d3.select("body")
 
 d3.tsv("data.tsv", type, function(error, data) {
   x.domain(data.map(function(d) { return d.year; }));
-  y0.domain([0, d3.max(data, function(d) { return d.money; })]);
+  y.domain([0, d3.max(data, function(d) { return d.money; })]);
 
   svg.append("g")
       .attr("class", "x axis")
@@ -49,40 +39,22 @@ d3.tsv("data.tsv", type, function(error, data) {
   svg.append("g")
      .attr("class", "y axis axisLeft")
      .attr("transform", "translate(0,0)")
-     .call(yAxisLeft)
+     .call(yAxis)
     .append("text")
      .attr("y", 6)
      .attr("dy", "-2em")
      .style("text-anchor", "end")
-     .style("text-anchor", "end")
-     .text("Dollars");
+     .style("text-anchor", "end");
 
-  svg.append("g")
-     .attr("class", "y axis axisRight")
-     .attr("transform", "translate(" + (width) + ",0)")
-     .call(yAxisRight)
-    .append("text")
-     .attr("y", 6)
-     .attr("dy", "-2em")
-     .attr("dx", "2em")
-     .style("text-anchor", "end")
-     .text("#");
 
-  bars = svg.selectAll(".bar").data(data).enter();
+  var bars = svg.selectAll(".bar").data(data).enter();
 
   bars.append("rect")
       .attr("class", "bar1")
       .attr("x", function(d) { return x(d.year); })
-      .attr("width", x.rangeBand()/2)
-      .attr("y", function(d) { return y0(d.money); })
-      .attr("height", function(d,i,j) { return height - y0(d.money); });
-
-  bars.append("rect")
-      .attr("class", "bar2")
-      .attr("x", function(d) { return x(d.year) + x.rangeBand()/2; })
-      .attr("width", x.rangeBand() / 2)
-      .attr("y", function(d) { return y1(d.number); })
-      .attr("height", function(d,i,j) { return height - y1(d.number); });
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.money); })
+      .attr("height", function(d,i,j) { return height - y(d.money); });
 
 });
 
