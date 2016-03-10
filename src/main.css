@@ -2,11 +2,8 @@
       font: 10px sans-serif;
     }
 
-    .y.axisRight text {
-        fill: orange;
-    }
 
-    .y.axisLeft text {
+    .y.axis text {
         fill: steelblue;
     }
 
@@ -17,14 +14,10 @@
       shape-rendering: crispEdges;
     }
 
-    .bar1 {
+    .bar {
       fill: steelblue;
     }
 
-    .bar2 {
-      fill: orange;
-    }
-
-    .x.axis path {
+    .y.axis path {
       display: none;
     }
