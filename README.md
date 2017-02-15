@@ -15,4 +15,4 @@ Note: since d3.js uses ajax to load tsv files, the files contained in the src fo
 
 Use the following URL to access index.html
 
-    http://localhost:8000/index.html
+    http://localhost:8000/src/
