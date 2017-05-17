@@ -1,0 +1,19 @@
+body {
+  font: 10px sans-serif;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.y.axis path {
+  display: none;
+}
+.y.axis line {
+    stroke: #777;
+}
+
+.x.axis path {
+    stroke: #000;
+    stroke-width: 2px;
+}
